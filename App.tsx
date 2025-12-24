@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Stars, Gift, Sparkles, ChevronDown, ShieldCheck, Sun, Wind, Zap, Waves, Orbit, Compass, Telescope } from 'lucide-react';
 import { generateCelestialTribute, interpretWeave } from './services/geminiService';
 
@@ -178,13 +178,13 @@ const App: React.FC = () => {
 
           <div className="flex flex-col items-center">
             <div className="relative w-full max-w-2xl h-[250px] md:h-[400px] mb-8 bg-stone-50 rounded-2xl md:rounded-3xl overflow-hidden border border-stone-100">
-              <svg className="w-full h-full">
+              <svg className="w-full h-full" viewBox="0 0 600 400" preserveAspectRatio="none">
                 {threads.map((thread, i) => (
                   <g key={thread.id}>
-                    <line x1="0" y1={40 + i * (window.innerWidth < 768 ? 35 : 45)} x2="100%" y2={40 + i * (window.innerWidth < 768 ? 35 : 45)} stroke="#f3f4f6" strokeWidth="1" />
+                    <line x1="0" y1={40 + i * 60} x2="600" y2={40 + i * 60} stroke="#f3f4f6" strokeWidth="1" />
                     {selectedThreads.includes(thread.id) && (
                       <path
-                        d={`M 0 ${40 + i * (window.innerWidth < 768 ? 35 : 45)} Q 150 ${20 + i * (window.innerWidth < 768 ? 35 : 45)}, 300 ${40 + i * (window.innerWidth < 768 ? 35 : 45)} T 600 ${40 + i * (window.innerWidth < 768 ? 35 : 45)}`}
+                        d={`M 0 ${40 + i * 60} Q 150 ${20 + i * 60}, 300 ${40 + i * 60} T 600 ${40 + i * 60}`}
                         fill="transparent"
                         stroke={thread.color}
                         strokeWidth="3"

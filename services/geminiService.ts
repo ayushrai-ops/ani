@@ -1,7 +1,6 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
 
 export const generateCelestialTribute = async (names: string, cluster: string, theme: string): Promise<string> => {
   try {
@@ -16,6 +15,7 @@ export const generateCelestialTribute = async (names: string, cluster: string, t
     });
     return response.text || "Your love is the North Star of our family—unwavering, bright, and always guiding us home.";
   } catch (error) {
+    console.error("Celestial tribute error:", error);
     return "Across the vast cosmos of time, your two hearts found their perfect orbit together. Happy Anniversary!";
   }
 };
@@ -33,6 +33,7 @@ export const interpretWeave = async (names: string, values: string[]): Promise<s
     });
     return response.text || "Your lives are woven into a tapestry of resilience and warmth. A true masterpiece of love.";
   } catch (error) {
+    console.error("Weave interpretation error:", error);
     return "The threads of your lives have created a bond that is both elegant and unbreakable.";
   }
 };
