@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Heart, Stars, Gift, Sparkles, ChevronDown, ShieldCheck, Sun, Wind, Zap, Waves, Orbit, Compass, Telescope } from 'lucide-react';
 import { generateCelestialTribute, interpretWeave } from './services/geminiService';
 
