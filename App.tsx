@@ -62,7 +62,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section className="relative h-[100svh] flex flex-col items-center justify-center text-center p-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
         <div className="absolute top-10 animate-pulse text-rose-400">
-          <Heart size={40} md:size={48} fill="currentColor" />
+          <Heart size={40} fill="currentColor" />
         </div>
         
         <h1 className="font-serif text-4xl md:text-8xl mb-4 text-stone-800 tracking-tight leading-tight px-2">
@@ -106,14 +106,13 @@ const App: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             {/* Interactive Sky Box */}
-            <div className="relative aspect-square w-full max-w-[320px] md:max-w-md mx-auto">
+            <div className="relative aspect-square w-full max-w-[280px] md:max-w-md mx-auto">
               <div className="absolute inset-0 rounded-full border border-slate-800/50 animate-spin-slow"></div>
               <div className="absolute inset-4 rounded-full border border-slate-700/30 animate-spin-slow-reverse"></div>
               
               <div className="relative w-full h-full flex items-center justify-center">
                 {starClusters.map((cluster, i) => {
                   const angle = (i * 120);
-                  const radius = window.innerWidth < 768 ? 100 : 140;
                   return (
                     <button
                       key={cluster.id}
@@ -121,14 +120,14 @@ const App: React.FC = () => {
                       className={`absolute p-4 md:p-6 rounded-full transition-all duration-500 group
                         ${activeCluster === cluster.id ? 'bg-slate-800 scale-110 md:scale-125 shadow-xl' : 'bg-transparent hover:bg-slate-900/50'}`}
                       style={{
-                        transform: `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg)`
-                      }}
+                        transform: `rotate(${angle}deg) translate(var(--celestial-radius)) rotate(-${angle}deg)`
+                      } as React.CSSProperties}
                     >
                       <div className="relative">
                          <div className={`transition-transform duration-300 group-hover:scale-110 ${activeCluster === cluster.id ? 'animate-pulse' : ''}`}>
                           {cluster.icon}
                          </div>
-                         <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                         <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 md:group-hover:opacity-100 transition-opacity">
                            <span className="text-[10px] md:text-xs font-mono tracking-widest text-slate-300">{cluster.label}</span>
                          </div>
                       </div>
@@ -137,7 +136,7 @@ const App: React.FC = () => {
                 })}
                 
                 <div className="bg-white/5 p-6 md:p-8 rounded-full backdrop-blur-sm border border-white/10">
-                   <Stars className="text-yellow-200" size={32} md:size={48} />
+                   <Stars className="text-yellow-200" size={32} />
                 </div>
               </div>
             </div>
@@ -152,16 +151,16 @@ const App: React.FC = () => {
               ) : celestialReading ? (
                 <div className="bg-slate-900/80 p-6 md:p-10 rounded-3xl border border-slate-800 shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-500">
                   <div className="flex items-center gap-2 text-yellow-400 mb-4 font-mono text-[10px] md:text-sm tracking-widest uppercase">
-                    <Sparkles size={14} /> Constellation: {starClusters.find(c => c.id === activeCluster)?.label}
+                    <Sparkles size={14} /> Reading: {starClusters.find(c => c.id === activeCluster)?.label}
                   </div>
-                  <p className="text-xl md:text-3xl font-serif text-slate-100 leading-relaxed italic">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-serif text-slate-100 leading-relaxed italic">
                     {celestialReading}
                   </p>
                 </div>
               ) : (
                 <div className="text-center p-8 border-2 border-dashed border-slate-800 rounded-3xl opacity-40">
                   <Telescope size={48} className="mx-auto mb-3" />
-                  <p className="font-serif text-sm md:text-lg">Select a cluster to reveal its cosmic story.</p>
+                  <p className="font-serif text-sm md:text-lg text-slate-300">Select a cluster to reveal its cosmic story.</p>
                 </div>
               )}
             </div>
@@ -182,10 +181,10 @@ const App: React.FC = () => {
               <svg className="w-full h-full">
                 {threads.map((thread, i) => (
                   <g key={thread.id}>
-                    <line x1="0" y1={40 + i * 45} x2="100%" y2={40 + i * 45} stroke="#f3f4f6" strokeWidth="1" />
+                    <line x1="0" y1={40 + i * (window.innerWidth < 768 ? 35 : 45)} x2="100%" y2={40 + i * (window.innerWidth < 768 ? 35 : 45)} stroke="#f3f4f6" strokeWidth="1" />
                     {selectedThreads.includes(thread.id) && (
                       <path
-                        d={`M 0 ${40 + i * 45} Q 150 ${20 + i * 45}, 300 ${40 + i * 45} T 600 ${40 + i * 45}`}
+                        d={`M 0 ${40 + i * (window.innerWidth < 768 ? 35 : 45)} Q 150 ${20 + i * (window.innerWidth < 768 ? 35 : 45)}, 300 ${40 + i * (window.innerWidth < 768 ? 35 : 45)} T 600 ${40 + i * (window.innerWidth < 768 ? 35 : 45)}`}
                         fill="transparent"
                         stroke={thread.color}
                         strokeWidth="3"
@@ -205,7 +204,7 @@ const App: React.FC = () => {
                 <button
                   key={thread.id}
                   onClick={() => toggleThread(thread.id)}
-                  className={`flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full border-2 text-sm md:text-base transition-all ${selectedThreads.includes(thread.id) ? 'bg-stone-900 text-white border-stone-900' : 'bg-white border-stone-200 text-stone-600'}`}
+                  className={`flex items-center gap-2 px-3 py-2 md:px-6 md:py-3 rounded-full border-2 text-xs md:text-base transition-all ${selectedThreads.includes(thread.id) ? 'bg-stone-900 text-white border-stone-900' : 'bg-white border-stone-200 text-stone-600'}`}
                 >
                   {thread.icon}
                   <span className="font-medium">{thread.label}</span>
@@ -223,7 +222,7 @@ const App: React.FC = () => {
 
             {weaveAnalysis && (
               <div className="mt-10 w-full max-w-2xl bg-stone-50 p-6 md:p-10 rounded-3xl border-l-4 md:border-l-8 border-rose-500 shadow-sm animate-in fade-in slide-in-from-bottom-4">
-                <p className="text-base md:text-lg text-stone-700 leading-relaxed font-light italic">{weaveAnalysis}</p>
+                <p className="text-sm md:text-lg text-stone-700 leading-relaxed font-light italic">{weaveAnalysis}</p>
               </div>
             )}
           </div>
@@ -242,7 +241,7 @@ const App: React.FC = () => {
           ) : (
             <div 
               ref={letterRef}
-              className="bg-white p-6 md:p-16 shadow-2xl rounded-sm border border-stone-200 transform rotate-0 md:rotate-1 animate-in zoom-in fade-in duration-700 text-left"
+              className="bg-white p-6 md:p-16 shadow-2xl rounded-sm border border-stone-200 text-left animate-in zoom-in fade-in duration-700"
             >
               <div className="font-cursive text-2xl md:text-4xl text-stone-800 leading-relaxed space-y-6">
                 <div className="font-bold border-b border-stone-100 pb-4">Dearest Mom and Dad,</div>
@@ -263,6 +262,14 @@ const App: React.FC = () => {
       </footer>
 
       <style>{`
+        :root {
+          --celestial-radius: 140px;
+        }
+        @media (max-width: 768px) {
+          :root {
+            --celestial-radius: 90px;
+          }
+        }
         @keyframes twinkle {
           0%, 100% { opacity: 0.2; transform: scale(0.9); }
           50% { opacity: 1; transform: scale(1.1); }
