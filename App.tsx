@@ -249,7 +249,7 @@ const App: React.FC = () => {
                 <p>I realize just how rare and precious your relationship is. You've shown me what it means to grow together and prioritize love above all else.</p>
                 <p>I am beyond lucky to have you. You are my anchors, my biggest cheerleaders, and my greatest examples of what "true love" really looks like.</p>
                 <div className="pt-6">With all my love,</div>
-                <div className="text-rose-600 font-bold">Your son Ayush ❤️</div>
+                <div className="text-rose-600 font-bold">Ayush ❤️</div>
               </div>
             </div>
           )}
