@@ -251,7 +251,7 @@ const App: React.FC = () => {
               <div className="mt-12 max-w-2xl bg-stone-50 p-10 rounded-[2rem] border-l-8 border-rose-500 animate-in zoom-in-95 duration-700">
                 <Sparkles className="text-rose-500 mb-4" />
                 <h4 className="text-2xl font-serif text-stone-800 mb-4 italic">The Fabric of Your Love</h4>
-                <p className="text-lg text-stone-600 leading-relaxed font-light">{weaveAnalysis}</p>
+                <p className="text-lg text-stone-600 Gallery leading-relaxed font-light">{weaveAnalysis}</p>
               </div>
             )}
           </div>
