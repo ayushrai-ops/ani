@@ -260,32 +260,6 @@ const App: React.FC = () => {
         <p className="text-xs tracking-widest uppercase mb-1">Forever Together • Raj & Deepa</p>
         <p className="text-[10px] italic">Handcrafted with love by Ayush</p>
       </footer>
-
-      <style>{`
-        :root {
-          --celestial-radius: 140px;
-        }
-        @media (max-width: 768px) {
-          :root {
-            --celestial-radius: 90px;
-          }
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(0.9); }
-          50% { opacity: 1; transform: scale(1.1); }
-        }
-        .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes spin-slow-reverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
-        .animate-spin-slow { animation: spin-slow 25s linear infinite; }
-        .animate-spin-slow-reverse { animation: spin-slow-reverse 20s linear infinite; }
-      `}</style>
     </div>
   );
 };
